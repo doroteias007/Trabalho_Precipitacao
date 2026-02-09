@@ -22,12 +22,11 @@ altere apenas o CSV_PRECIPITACAO, qualquer outro dado alterado vai resultar em e
 # CONFIGURACAO - Defina os caminhos dos arquivos aqui
 # =============================================================================
 CSV_COEFICIENTES = (
-    r"C:\Users\joser\projects\Codes\Python"
-    r"\Trabalho Qgis Areas\Data\isozonas_coeficientes.csv"
+    r"C:\Users\joser\projects\Codes\Python\Trabalho Qgis Areas\Data\isozonas_coeficientes.csv"
+    
 )
 CSV_PRECIPITACAO = (
-    r"C:\Users\joser\projects\Codes\Python"
-    r"\Trabalho Qgis Areas\Data\isozonas_precipitacao.csv"
+    r"C:\Users\joser\projects\Codes\Python\Trabalho Qgis Areas\Data\isozonas_precipitacao.csv"
 )
 # =============================================================================
 
