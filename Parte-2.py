@@ -19,8 +19,8 @@ import pandas as pd
 # =============================================================================
 # CONFIGURACAO - Defina os caminhos dos arquivos aqui
 # =============================================================================
-CSV_PATH = r"C:\Users\joser\projects\Codes\Antigravity\data\precipitacao_zona_D.csv"
-CSV_SAIDA = r"C:\Users\joser\projects\Codes\Antigravity\data\huff\huff_resultado.csv"
+CSV_PATH = r"Data/precipitacao_zona_A.csv"
+CSV_SAIDA = r"Data/precipitacao_huff_saida.csv"
 # =============================================================================
 
 
