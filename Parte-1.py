@@ -12,7 +12,8 @@ import geopandas as gpd
 from shapely.geometry import Point
 """
 Caminhos dos arquivos
-Siga essa ordem de colunas no seu arquivo.csv de precipitação(leve em consideracao que esses precisam ser os nomes das colunas):
+Siga essa ordem de colunas no seu arquivo.csv de precipitação
+Leve em consideracao que esses precisam ser os nomes das colunas:
     Isozona, Tempo_retorno, Duracao, Precipitacao
 altere apenas o CSV_PRECIPITACAO, qualquer outro dado alterado vai resultar em erros.
 """
