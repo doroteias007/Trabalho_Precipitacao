@@ -444,7 +444,9 @@ def distribuir_chuva_huff(precipitacao_mm: float, duracao_horas: float) -> np.nd
     
     Exemplo:
         - Minuto 1:  pb=0.83%  → PAc=0.5%  → acum=0.5mm  → intensidade=0.5mm
-        - Minuto 2:  pb=1.67%  → PAc=1.2%  → acum=1.2mm  → intensidade=0.7mm (1.2 - 0.5)
+        - Minuto 2:  pb=1.67%  → PAc=1.2%  → acum=1.2mm  → intensidade=0.7mm (1.2-0.5)
+        - Minuto 3:  pb=2.50%  → PAc=2.0%  → acum=2.0mm  → intensidade=0.8mm (2.0-1.2)
+        - Minuto 4:  pb=3.33%  → PAc=2.9%  → acum=2.9mm  → intensidade=0.9mm (2.9-2.0)
         - Minuto 60: pb=50%    → PAc=70%   → acum=70mm   → intensidade=2.0mm (pico)
         - Minuto 120: pb=100%  → PAc=100%  → acum=100mm  → intensidade=0.3mm
     """
