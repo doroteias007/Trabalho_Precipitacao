@@ -323,7 +323,12 @@ def exibir_tabela(
 
 
 def main() -> None:
-    """Função principal do programa."""
+    """
+    Função principal, Inicia a execução do programa.
+    
+    Exceções:
+        ValueError: Se a zona não for encontrada ou arquivo inválido.
+    """
     # Input de latitude e longitude
     try:
         latitude = float(input("Digite a latitude: "))
@@ -361,7 +366,7 @@ def main() -> None:
         salvar = input("Deseja salvar a tabela como CSV? (s/n): ").strip().lower()
         if salvar in ('s', 'sim', 'y', 'yes'):
             caminho_saida = rf"C:\Users\joser\projects\Codes\Python\Trabalho Qgis Areas\Data\precipitacao_zona_{zona.upper()}.csv"
-            df_tabela.to_csv(caminho_saida, index=False, sep=';', decimal=',')
+            df_tabela.to_csv(caminho_saida, index=False, sep=';', decimal='.')
             print(f"\nArquivo salvo em: {caminho_saida}")
 
     except FileNotFoundError as e:

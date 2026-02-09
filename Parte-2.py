@@ -187,11 +187,11 @@ def distribuir_chuva_huff(precipitacao_mm: float, duracao_horas: float) -> np.nd
     return np.array(intensidades)
 
 
-def converter_formato_final_para_huff(df: pd.DataFrame) -> pd.DataFrame:
+def converter_csv_para_huff(df: pd.DataFrame) -> pd.DataFrame:
     """
-    Converte o formato de saída do Final.py para o formato Huff.
+    Converte o formato de saída do parte-1.py para o formato Huff.
     
-    Formato de entrada (Final.py):
+    Formato de entrada (parte-1.py):
         Duração;TR 2;TR 5;TR 10;...
         6 min;12,34;15,67;18,90;...
         
@@ -255,24 +255,24 @@ def converter_formato_final_para_huff(df: pd.DataFrame) -> pd.DataFrame:
 
 def processar_csv(caminho_entrada: str, caminho_saida: str = None) -> pd.DataFrame:
     """
-    Lê o CSV de entrada no formato Final.py e gera o DataFrame de saída.
+    Lê o CSV de entrada no formato parte-1.py e gera o DataFrame de saída.
     
-    Formato de entrada esperado (saída do Final.py):
+    Formato de entrada esperado (saída do parte-1.py):
         Duração;TR 2;TR 5;TR 10;...
         6 min;12,34;15,67;18,90;...
     
     Parâmetros:
-        caminho_entrada: Caminho do CSV de entrada (formato Final.py)
+        caminho_entrada: Caminho do CSV de entrada (formato parte-1.py)
         caminho_saida: Caminho opcional para salvar o resultado em CSV
         
     Retorna:
         DataFrame com colunas para cada combinação TR/duração
     """
-    # Ler CSV no formato Final.py (separador ; e decimal ,)
-    df_entrada = pd.read_csv(caminho_entrada, sep=';', decimal=',')
+    # Ler CSV no formato parte-1.py (separador ; e decimal ,)
+    df_entrada = pd.read_csv(caminho_entrada, sep=';', decimal='.')
     
     # Converter para formato interno (a função já ignora valores vazios)
-    df_entrada = converter_formato_final_para_huff(df_entrada)
+    df_entrada = converter_csv_para_huff(df_entrada)
     
     # Determinar número máximo de minutos (maior duração)
     max_duracao_horas = df_entrada['duracao_horas'].max()
@@ -325,7 +325,7 @@ def processar_csv(caminho_entrada: str, caminho_saida: str = None) -> pd.DataFra
     # Salvar se caminho especificado
     if caminho_saida:
         # Arredondar para 4 casas decimais e usar separador ponto-e-virgula para Excel
-        df_saida.round(4).to_csv(caminho_saida, index=False, sep=';', decimal=',')
+        df_saida.round(4).to_csv(caminho_saida, index=False, sep=';', decimal='.')
     
     return df_saida
 
