@@ -19,7 +19,7 @@ CSV_COEFICIENTES = (
     r"C:\Users\joser\projects\Codes\Python\Trabalho Qgis Areas\Data\isozonas_coeficientes.csv"
 )
 CSV_PRECIPITACAO = (
-    r"C:\Users\joser\projects\Codes\Python\Trabalho Qgis Areas\Data\isozonas_precipitacao.csv"
+    r"C:\Users\joser\projects\Codes\Python\Trabalho Qgis Areas\Data\precipitacao-teste.csv"
 )
 SHAPEFILE_PATH = (
     r"C:\Users\joser\projects\Codes\Python"
@@ -29,13 +29,13 @@ CSV_HUFF_ENTRADA = r"Data/precipitacao_zona_A.csv"
 CSV_HUFF_SAIDA = r"Data/precipitacao_huff_saida.csv"
 # =============================================================================
 """
-Siga essa ordem de colunas no seu arquivo.csv de precipitação
-Leve em consideracao que esses precisam ser os nomes das colunas:
-    Isozona, Tempo_retorno, Duracao, Precipitacao
-altere apenas o CSV_PRECIPITACAO, qualquer outro dado alterado vai resultar em erros.
+O CSV de precipitação deve conter apenas 2 colunas:
+    tempo_retorno, precipitacao
+A isozona detectada pelas coordenadas será usada
+apenas para selecionar os coeficientes corretos.
 """
 # Colunas esperadas
-COLUNAS_PRECIPITACAO = ['isozona', 'tempo_retorno', 'duracao', 'precipitacao']
+COLUNAS_PRECIPITACAO = ['tempo_retorno', 'precipitacao']
 COLUNAS_COEFICIENTES = ['isozona', 'coef_1h_24h', 'coef_6min_24h']
 
 # Durações em horas (6 min até 24h)
@@ -73,7 +73,7 @@ def get_isozona(lat: float, lon: float) -> str | None:
 def validar_csv_precipitacao(df: pd.DataFrame) -> bool:
     """
     Valida se o DataFrame de precipitação tem as colunas corretas.
-    DataFrame = estrutura bidimensional de dados(tabela)
+    DataFrame = estrutura bidimensional de dados (tabela).
 
     Argumentos:
         df: DataFrame carregado do CSV de precipitação.
@@ -99,7 +99,7 @@ def carregar_csv_com_decimal(caminho: str) -> pd.DataFrame:
     """
     df = pd.read_csv(caminho)
     for col in df.columns:
-        if df[col].dtype == 'object' and col != 'isozona' and col != 'duracao':
+        if df[col].dtype == 'object' and col != 'isozona':
             try:
                 df[col] = df[col].str.replace(',', '.').astype(float)
             except (ValueError, AttributeError):
@@ -109,37 +109,47 @@ def carregar_csv_com_decimal(caminho: str) -> pd.DataFrame:
 
 def carregar_dados(zona: str) -> pd.DataFrame:
     """
-    Carrega os dados dos CSVs e filtra pela zona especificada.
+    Carrega o CSV de precipitação e combina
+    com os coeficientes da isozona detectada.
 
-    Combina os dados de precipitação e coeficientes em um único DataFrame.
+    O CSV de precipitação contém apenas tempo_retorno e
+    precipitacao. A isozona é usada somente para buscar
+    os coeficientes no CSV de coeficientes.
 
     Argumentos:
-        zona: Nome da isozona para filtrar os dados.
+        zona: Nome da isozona para buscar coeficientes.
 
     Retornos:
-        DataFrame filtrado com os dados da zona (precipitação + coeficientes).
+        DataFrame com precipitação + coeficientes da zona.
 
     Exceções:
-        ValueError: Se a zona não for encontrada ou arquivo inválido.
+        ValueError: Se a zona não for encontrada.
     """
     df_precip = carregar_csv_com_decimal(CSV_PRECIPITACAO)
     df_coef = carregar_csv_com_decimal(CSV_COEFICIENTES)
 
     if not validar_csv_precipitacao(df_precip):
-        raise ValueError("Verifique se o arquivo isozonas_precipitacao.csv está de acordo.")
-
-    zona_upper = zona.strip().upper()
-    df_precip_zona = df_precip[df_precip['isozona'].str.strip().str.upper() == zona_upper]
-    df_coef_zona = df_coef[df_coef['isozona'].str.strip().str.upper() == zona_upper]
-
-    if df_precip_zona.empty:
-        zonas_disponiveis = df_precip['isozona'].unique()
         raise ValueError(
-            f"Zona '{zona}' não encontrada. Zonas: {list(zonas_disponiveis)}"
+            "CSV de precipitação inválido. "
+            "Colunas esperadas: tempo_retorno, precipitacao"
         )
 
-    df_zona = df_precip_zona.merge(
-        df_coef_zona[['tempo_retorno', 'coef_1h_24h', 'coef_6min_24h']],
+    zona_upper = zona.strip().upper()
+    df_coef_zona = df_coef[
+        df_coef['isozona'].str.strip().str.upper() == zona_upper
+    ]
+
+    if df_coef_zona.empty:
+        zonas_disponiveis = df_coef['isozona'].unique()
+        raise ValueError(
+            f"Zona '{zona}' não encontrada. "
+            f"Zonas: {list(zonas_disponiveis)}"
+        )
+
+    df_zona = df_precip.merge(
+        df_coef_zona[[
+            'tempo_retorno', 'coef_1h_24h', 'coef_6min_24h'
+        ]],
         on='tempo_retorno', how='left'
     )
     return df_zona
