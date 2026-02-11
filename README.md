@@ -4,7 +4,7 @@ Sistema para cálculo de precipitação por isozonas e distribuição temporal d
 
 ---
 
-## 📋 Índice
+##  Índice
 
 - [Visão Geral](#visão-geral)
 - [Dependências](#dependências)
