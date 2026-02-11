@@ -23,8 +23,8 @@ O script `Main.py` combina dois módulos:
 
 | Módulo | Função | Entrada | Saída |
 |--------|--------|---------|-------|
-| **Precipitação por Isozonas** | Calcula precipitação para 16 durações e múltiplos tempos de retorno | Coordenadas (lat, lon) + CSV de precipitação | Tabela de precipitação (CSV) |
-| **Distribuição Temporal (Huff)** | Distribui a precipitação minuto a minuto | CSV gerado pelo Módulo 1 | CSV com intensidades mm/min |
+| ** 1 - Precipitação por Isozonas** | Calcula precipitação para 16 durações e múltiplos tempos de retorno | Coordenadas (lat, lon) + CSV de precipitação | Tabela de precipitação (CSV) |
+| ** 2 - Distribuição Temporal (Huff)** | Distribui a precipitação minuto a minuto | CSV de precipitacao (gerado pelo Módulo 1) | CSV com intensidades mm/min |
 
 ---
 
