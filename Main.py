@@ -16,17 +16,25 @@ from shapely.geometry import Point
 # CONFIGURAÇÃO DE CAMINHOS
 # =============================================================================
 CSV_COEFICIENTES = (
-    r"C:\Users\joser\projects\Codes\Python\Trabalho Qgis Areas\Data\isozonas_coeficientes.csv"
+    r"C:\Users\joser\projects\Codes\Python\Trabalho Qgis Areas"
+    r"\Dados de entrada\isozonas_coeficientes.csv"
 )
 CSV_PRECIPITACAO = (
-    r"C:\Users\joser\projects\Codes\Python\Trabalho Qgis Areas\Data\precipitacao-teste.csv"
+    r"C:\Users\joser\projects\Codes\Python\Trabalho Qgis Areas"
+    r"\Dados de entrada\precipitacao-teste.csv"
 )
 SHAPEFILE_PATH = (
-    r"C:\Users\joser\projects\Codes\Python"
-    r"\Trabalho Qgis Areas\Isozonas_GrausDecimais (1)\Isozonas_GrausDecimais.shp"
+    r"C:\Users\joser\projects\Codes\Python\Trabalho Qgis Areas"
+    r"\Dados de entrada\Shapefile\Isozonas_GrausDecimais.shp"
 )
-CSV_HUFF_ENTRADA = r"Data/precipitacao_zona_A.csv"
-CSV_HUFF_SAIDA = r"Data/precipitacao_huff_saida.csv"
+CSV_HUFF_ENTRADA = (
+    r"C:\Users\joser\projects\Codes\Python\Trabalho Qgis Areas"
+    r"\Dados de saída\precipitacao_zona_E.csv"
+)
+CSV_HUFF_SAIDA = (
+    r"C:\Users\joser\projects\Codes\Python\Trabalho Qgis Areas"
+    r"\Dados de Saída\precipitacao_huff_saida.csv"
+)
 # =============================================================================
 """
 O CSV de precipitação deve conter apenas 2 colunas:
@@ -327,8 +335,8 @@ def executar_Precipitação_por_Isozonas(
 
         if caminho_saida is None:
             caminho_saida = (
-                rf"C:\Users\joser\projects\Codes\Python\Trabalho Qgis Areas"
-                rf"\Data\precipitacao_zona_{zona.upper()}.csv"
+                r"C:\Users\joser\projects\Codes\Python\Trabalho Qgis Areas"
+                rf"\Dados de Saída\precipitacao_zona_{zona.upper()}.csv"
             )
 
         if salvar_automatico:
