@@ -179,7 +179,7 @@ Gera a tabela final com as 16 durações padrão:
 
 ```mermaid
 graph TD
-    A[CSV do Módulo 1] --> B[converter_csv_para_huff: Converte formato]
+    A[CSV de precipitacao (gerado pelo Módulo 1)] --> B[converter_csv_para_huff: Converte formato]
     B --> C["Para cada cenário (TR × duração):"]
     C --> D[distribuir_chuva_huff: Distribui mm por minuto]
     D --> E[processar_csv_huff: Monta tabela final]
