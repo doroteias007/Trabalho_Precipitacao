@@ -24,7 +24,7 @@ O script `Main.py` combina dois módulos:
 | Módulo | Função | Entrada | Saída |
 |--------|--------|---------|-------|
 | **1 - Precipitação por Isozonas** | Calcula precipitação para 16 durações e múltiplos tempos de retorno | Coordenadas (lat, lon) + CSV de precipitação | Tabela de precipitação (CSV) |
-| **2 - Distribuição Temporal (Huff)** | Distribui a precipitação minuto a minuto | CSV de precipitacao (gerado pelo Módulo 1) | CSV com intensidades mm/min |
+| **2 - Distribuição Temporal (Huff)** | Distribui a precipitação minuto a minuto | CSV de precipitação (gerado pelo Módulo 1) | CSV com intensidades mm/min |
 
 ---
 
@@ -179,7 +179,7 @@ Gera a tabela final com as 16 durações padrão:
 
 ```mermaid
 graph TD
-    A[CSV de precipitacao (gerado pelo Módulo 1)] --> B[converter_csv_para_huff: Converte formato]
+    A[CSV de precipitação - gerado pelo Módulo 1] --> B[converter_csv_para_huff: Converte formato]
     B --> C["Para cada cenário (TR × duração):"]
     C --> D[distribuir_chuva_huff: Distribui mm por minuto]
     D --> E[processar_csv_huff: Monta tabela final]
