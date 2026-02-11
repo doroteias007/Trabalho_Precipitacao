@@ -196,7 +196,6 @@ O método seleciona automaticamente o quartil com base na duração da chuva:
 | ≤ 6h | 1º Quartil | ~25% do tempo (início) |
 | 6h – 12h | 2º Quartil | ~40% do tempo |
 | 12h – 24h | 3º Quartil | ~60% do tempo |
-| > 24h | 4º Quartil | ~75% do tempo (final) |
 
 ### `calcular_pac_huff(pb, duracao_horas)`
 Calcula a **porcentagem acumulada de precipitação** (PAc) dado o tempo decorrido (pb):
