@@ -299,15 +299,15 @@ Total de cenários processados: 176
 Total de linhas (minutos): 1440
 
 Colunas geradas:
-    1. 2,6min             | Pmax = 1.60 mm
-    2. 2,10min            | Pmax = 3.09 mm
-    3. 2,15min            | Pmax = 4.28 mm
-    4. 2,1h               | Pmax = 8.34 mm
+    1. 2,6min             | Pacm = 1.60 mm
+    2. 2,10min            | Pacm = 3.09 mm
+    3. 2,15min            | Pacm = 4.28 mm
+    4. 2,1h               | Pacm = 8.34 mm
     ...
-   16. 2,24h              | Pmax = 22.80 mm
-   17. 5,6min             | Pmax = 2.39 mm
+   16. 2,24h              | Pacm = 22.80 mm
+   17. 5,6min             | Pacm = 2.39 mm
     ...
-  176. 10000,24h           | Pmax = 356.80 mm
+  176. 10000,24h           | Pacm = 356.80 mm
 
 ======================================================================
 
