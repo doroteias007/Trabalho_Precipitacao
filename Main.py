@@ -579,7 +579,7 @@ def exibir_resumo_huff(df: pd.DataFrame):
     print(f"Total de linhas (minutos): {len(df)}")
     print("\nColunas geradas:")
     for i, col in enumerate(colunas, 1):
-        print(f"   {i:2d}. {col:<20} | Pmax = {df[col].sum():.2f} mm")
+        print(f"   {i:2d}. {col:<20} | Pacm = {df[col].sum():.2f} mm")
     print("\n" + "=" * 70)
 
 
