@@ -43,6 +43,22 @@ pip install pandas numpy geopandas shapely
 
 ---
 
+## Estrutura de Arquivos
+
+```
+Trabalho Qgis Areas/
+├── Main.py                          # Script principal
+├── Data/
+│   ├── precipitacao-teste.csv       # CSV de precipitação (entrada)
+│   ├── isozonas_coeficientes.csv    # Coeficientes por isozona
+│   ├── precipitacao_zona_X.csv      # Saída do Módulo 1
+│   └── precipitacao_huff_saida.csv  # Saída do Módulo 2
+└── Isozonas_GrausDecimais (1)/
+    └── Isozonas_GrausDecimais.shp   # Shapefile com as isozonas
+```
+
+---
+
 ## Arquivos de Entrada
 
 ### `precipitacao-teste.csv` — Dados de Precipitação
@@ -62,7 +78,7 @@ O CSV deve conter **apenas 2 colunas** e ser referente a **uma isozona específi
 
 > **Nota:** A isozona **não** precisa constar no CSV. O código detecta a isozona pelas coordenadas e utiliza os coeficientes correspondentes.
 
-### `coeficientes.csv` — Coeficientes
+### `isozonas_coeficientes.csv` — Coeficientes
 
 Contém os coeficientes de conversão para cada isozona:
 
@@ -274,8 +290,77 @@ Duração        TR 2      TR 5     TR 10   ...
 ==============================================================================
 ```
 
+### Opção 2 — Distribuição Temporal (Huff)
+```
+======================================================================
+   DISTRIBUIÇÃO TEMPORAL - MÉTODO HUFF
+======================================================================
+
+Total de cenários processados: 176
+Total de linhas (minutos): 1440
+
+Colunas geradas:
+    1. 2,6min             | Pmax = 1.60 mm
+    2. 2,10min            | Pmax = 3.09 mm
+    3. 2,15min            | Pmax = 4.28 mm
+    4. 2,1h               | Pmax = 8.34 mm
+    ...
+   16. 2,24h              | Pmax = 22.80 mm
+   17. 5,6min             | Pmax = 2.39 mm
+    ...
+  176. 10000,24h           | Pmax = 356.80 mm
+
+======================================================================
+
+Arquivo salvo em: Data/precipitacao_huff_saida.csv
+```
+
+O CSV de saída contém uma coluna por cenário (TR × duração) com as intensidades em mm/min para cada minuto.
+
 ### Opção 3 — Encadeado
-Executa automaticamente os dois módulos em sequência, sem necessidade de intervenção.
+Executa automaticamente os dois módulos em sequência:
+
+```
+>>> Executando Precipitação + Distribuição (Encadeado) <<<
+
+Digite a latitude: -5.48
+Digite a longitude: -39.2
+
+Zona identificada: A
+
+==============================================================================
+TABELA DE PRECIPITAÇÃO (mm)
+Coordenadas: (-5.48, -39.2) - Zona: A
+==============================================================================
+Duração        TR 2      TR 5     TR 10   ...
+------------------------------------------------------------------------------
+6 min          5.23      7.84     13.07   ...
+...
+24 h          22.80     34.20     57.00   ...
+==============================================================================
+
+Arquivo salvo em: ...\Data\precipitacao_zona_A.csv
+
+>>> Iniciando Distribuição Temporal com o arquivo gerado <<<
+
+======================================================================
+   DISTRIBUIÇÃO TEMPORAL - MÉTODO HUFF
+======================================================================
+
+Total de cenários processados: 176
+Total de linhas (minutos): 1440
+
+Colunas geradas:
+    1. 2,6min             | Pmax = 1.60 mm
+    ...
+  176. 10000,24h           | Pmax = 356.80 mm
+
+======================================================================
+
+Arquivo salvo em: Data/precipitacao_huff_saida.csv
+```
+
+O Módulo 1 salva o CSV automaticamente, que é usado como entrada do Módulo 2 sem intervenção do usuário.
 
 ---
 
