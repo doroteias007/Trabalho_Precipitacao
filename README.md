@@ -1,4 +1,4 @@
-# 🌧️ Cálculo de Precipitação + Distribuição Temporal (Método Huff)
+# Cálculo de Precipitação + Distribuição Temporal (Método Huff)
 
 Sistema para cálculo de precipitação por isozonas e distribuição temporal de chuvas utilizando o Método de Huff.
 
